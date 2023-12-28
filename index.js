@@ -50,7 +50,7 @@ var corsOptions = {
 };
 
 // ENABLING CORS
-HTTP_SERVER.use(cors(corsOptions));
+HTTP_SERVER.use(cors());
 
 // REGISTERING ALL THE CONTROLLERS
 HTTP_SERVER.use("/api/events", require("./controllers/events.controller"));
