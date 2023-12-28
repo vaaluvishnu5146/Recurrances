@@ -20,7 +20,7 @@ HTTP_SERVER.use(bodyparser.json());
 
 // DEFINING A PORT AND LISTENING TO PORT WITH EXPRESS SERVER
 const PORT = process.env.DEV_SERVER_PORT;
-HTTP_SERVER.listen(PORT, () => {
+HTTP_SERVER.listen(PORT, process.env.NODE_HOSTNAME, () => {
   console.log("Server started successfully!");
 });
 
