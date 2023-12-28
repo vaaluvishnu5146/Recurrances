@@ -4,6 +4,11 @@ const cors = require("cors");
 const bodyparser = require("body-parser");
 const { connectToDatabase } = require("./database/dbconfig");
 
+// Configuring Dotenv package for creating custom ENVIRONMENT VARIABLES
+require("dotenv").config();
+
+console.log(process.env.NODE_ENV);
+
 // INITIATING CONNECTION WITH DATABASE
 connectToDatabase();
 
@@ -14,7 +19,7 @@ HTTP_SERVER.set("view engine", "ejs");
 HTTP_SERVER.use(bodyparser.json());
 
 // DEFINING A PORT AND LISTENING TO PORT WITH EXPRESS SERVER
-const PORT = 5000;
+const PORT = process.env.DEV_SERVER_PORT;
 HTTP_SERVER.listen(PORT, () => {
   console.log("Server started successfully!");
 });
@@ -29,10 +34,9 @@ HTTP_SERVER.get("/about", (req, res) => {
   res.render("pages/about");
 });
 
-var whitelist = ["http://127.0.0.1:5500"];
+var whitelist = ["http://127.0.0.1:5500", undefined];
 var corsOptions = {
   origin: function (origin, callback) {
-    console.log(origin);
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
@@ -42,7 +46,7 @@ var corsOptions = {
 };
 
 // ENABLING CORS
-HTTP_SERVER.use(cors());
+HTTP_SERVER.use(cors(corsOptions));
 
 // REGISTERING ALL THE CONTROLLERS
 HTTP_SERVER.use("/api/events", require("./controllers/events.controller"));
