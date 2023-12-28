@@ -34,7 +34,11 @@ HTTP_SERVER.get("/about", (req, res) => {
   res.render("pages/about");
 });
 
-var whitelist = ["http://127.0.0.1:5500", undefined];
+var whitelist = [
+  "http://127.0.0.1:5500",
+  undefined,
+  "https://recurrances.onrender.com",
+];
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
