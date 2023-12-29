@@ -8,7 +8,16 @@
   <body>
     <h1>Reccurances</h1>
     <script>
-      fetch("http://localhost:5000/api/events/")
+      fetch("http://localhost:5000/api/auth/signin", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          email: "test@test.com",
+          password: "password",
+        }),
+      })
         .then((response) => console.log(response))
         .catch((e) => console.log(e));
     </script>
